@@ -3,6 +3,7 @@ package runcheck
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/flightx31/exception"
 	"github.com/flightx31/file"
 	"github.com/spf13/afero"
 	"os"
@@ -50,13 +51,13 @@ func AbortStartup(workingDirectory string, runConfigName string) (bool, error) {
 
 	// Always returns a process on linux/OSX, on Windows it fails if that process doesn't exist.
 	process, err := os.FindProcess(runningConfig.PID)
+	exception.LogError(err)
 	log.Debug("Process pid " + strconv.Itoa(process.Pid) + " our pid " + strconv.Itoa(runningConfig.PID))
 
 	if err != nil {
 		return initRunningConfigToThisPIDReturnState(runConfigPath)
 	}
-	log.Error(err)
-	return false, err
+	return false, nil
 }
 
 func WritePortToRunConfig(port int, path string) error {
