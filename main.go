@@ -2,7 +2,6 @@ package runcheck
 
 import (
 	"fmt"
-	"github.com/flightx31/runcheck/pidcheck"
 	"github.com/spf13/afero"
 	"os"
 	"time"
@@ -10,8 +9,8 @@ import (
 
 func main() {
 	fs := afero.NewOsFs()
-	pidcheck.SetFs(fs)
-	abort, err := pidcheck.AbortStartup(".", "runConfig")
+	SetFs(fs)
+	abort, err := AbortStartup(".", "runConfig")
 
 	if err != nil {
 		fmt.Println(err.Error())

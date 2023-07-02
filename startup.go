@@ -1,4 +1,4 @@
-package pidcheck
+package runcheck
 
 import (
 	"bytes"
