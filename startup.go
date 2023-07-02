@@ -90,10 +90,11 @@ func AbortStartup(workingDirectory string, runConfigName string) (bool, error) {
 	}
 
 	p, err := ps.FindProcess(runningConfig.PID)
-	fmt.Print(p)
 
 	if p == nil {
 		return initRunningConfigToThisPIDReturnState(runConfigPath)
+	} else {
+		log.Error(p)
 	}
 
 	//running := getProcessRunningStatus(runningConfig.PID)
